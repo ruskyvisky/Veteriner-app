@@ -1,13 +1,13 @@
-package veterinerapp.veterinerapp;
+package veterinerapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class VeterinerappApplication {
- 
+public class VeterinerappBackendApplication {
+
 	public static void main(String[] args) {
-		SpringApplication.run(VeterinerappApplication.class, args);
+		SpringApplication.run(VeterinerappBackendApplication.class, args);
 	}
 
 }

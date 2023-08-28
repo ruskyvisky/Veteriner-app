@@ -1,13 +1,17 @@
-package veterinerapp.veterinerapp.entity;
-import lombok.*;
+package veterinerapp.entity;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
 
     private String username;
@@ -15,5 +19,4 @@ public class User extends BaseEntity {
     private String name;
     private String surname;
     private String phoneNumber;
-
-    }
+}
