@@ -1,4 +1,4 @@
-package veterinerapp.entity.dto;
+package veterinerapp.auth.Requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
