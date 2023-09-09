@@ -1,5 +1,6 @@
 package veterinerapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,6 +26,7 @@ import java.util.UUID;
 public class User  extends BaseEntity implements UserDetails {
 
     private String username;
+    @JsonIgnore
     private String password;
     private String name;
     private String surname;
@@ -36,31 +38,39 @@ public class User  extends BaseEntity implements UserDetails {
 
 
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
+
     public boolean isAccountNonLocked() {
         return true;
     }
-
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
+
     public boolean isEnabled() {
         return true;
     }
     @Override
+    @JsonIgnore
+
     public String getPassword(){
         return password;
     }

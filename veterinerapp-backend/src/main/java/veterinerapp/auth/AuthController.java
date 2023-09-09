@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import veterinerapp.auth.Requests.LoginRequest;
 import veterinerapp.auth.Requests.RegisterRequest;
+import veterinerapp.response.ApiResponse;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -19,13 +20,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest){
+    public ResponseEntity<ApiResponse> register(@RequestBody RegisterRequest registerRequest){
 
-        return ResponseEntity.ok(authService.register(registerRequest));
+        return authService.register(registerRequest);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest){
-        return ResponseEntity.ok(authService.login(loginRequest));
+    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest loginRequest){
+        return authService.login(loginRequest);
     }
 }

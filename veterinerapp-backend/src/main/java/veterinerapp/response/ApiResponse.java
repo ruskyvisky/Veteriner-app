@@ -1,4 +1,4 @@
-package veterinerapp.entity.response;
+package veterinerapp.response;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
