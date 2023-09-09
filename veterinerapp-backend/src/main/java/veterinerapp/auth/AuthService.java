@@ -18,6 +18,7 @@ import veterinerapp.enums.Message;
 import veterinerapp.repository.IUserRepository;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,12 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public ResponseEntity<ApiResponse> register(RegisterRequest registerRequest) {
+
+        User existingUser = userRepository.findByUsername(registerRequest.getUsername());
+
+        if(Objects.nonNull(existingUser)){
+            return new ResponseEntity<>(ApiResponse.builder().message(Message.USERNAME_ALREADY_EXISTS.getDesc()).build(), HttpStatus.CONFLICT);
+        }
         var user = User.builder()
                 .name(registerRequest.getName())
                 .surname(registerRequest.getSurname())
@@ -41,7 +48,6 @@ public class AuthService {
 
                 .build();
         userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
 
         return new ResponseEntity<>(ApiResponse.builder().data(userRepository.save(user)).message(Message.SUCCESS.getDesc()).build(), HttpStatus.OK);
 
@@ -56,11 +62,9 @@ public class AuthService {
                     )
             );
 
-            var user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
+            var user = userRepository.findByUsername(loginRequest.getUsername());
 
             var jwtToken = jwtService.generateToken(user);
-
-            // ApiResponse oluşturma ve ResponseEntity içine sarma
             ApiResponse response = ApiResponse.builder()
                     .data(jwtToken)
                     .message(Message.SUCCESS.getDesc())

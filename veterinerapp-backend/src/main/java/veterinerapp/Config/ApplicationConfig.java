@@ -27,8 +27,8 @@ public class ApplicationConfig {
     private final PasswordEncoder passwordEncoder;
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> repository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return username -> repository.findByUsername(username);
+
     }
 
     @Bean
