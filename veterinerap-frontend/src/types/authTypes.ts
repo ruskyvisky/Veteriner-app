@@ -1,4 +1,7 @@
-export type loginType ={
-    email: string,
-    password: string
+export interface authType {
+    username: string,
+    password: string,
+    name: string,
+    surname: string,
+    phoneNumber: string,
 }
