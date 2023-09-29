@@ -2,15 +2,14 @@ package veterinerapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import veterinerapp.entity.User;
+import veterinerapp.entity.Animal;
 
 import java.util.UUID;
 
 @Repository
-public interface IUserRepository extends JpaRepository<User, UUID> {
+public interface IAnimalRepository extends JpaRepository<Animal , UUID> {
 
-    User findByUsername(String username);
-
+    Animal findByAnimalName(String animalName);
 
 
 }

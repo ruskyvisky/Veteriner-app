@@ -19,6 +19,9 @@ public enum Message {
 
 
 
+    /** ANIMAL_SERVICE **/
+
+    ANIMAL_ALREADY_EXISTS("ANIMAL_ALREADY_EXISTS","Sistemde var olan bir hayvanı ekleyemezsiniz."),
 
 
     /** FILE_SERVICE */
