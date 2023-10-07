@@ -5,15 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddAnimalRequest {
-
+public class AnimalRequest {
+    private UUID id;
     private String animalName;
     private String animalType;
     private String animalAge;
