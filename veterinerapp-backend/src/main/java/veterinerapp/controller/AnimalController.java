@@ -3,13 +3,9 @@ package veterinerapp.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import veterinerapp.entity.Animal;
-import veterinerapp.enums.Message;
 import veterinerapp.repository.IAnimalRepository;
 import veterinerapp.requests.AnimalRequest;
 import veterinerapp.response.ApiResponse;
@@ -32,9 +28,12 @@ public class AnimalController {
     return animalService.addAnimal(addAnimalRequest);
 }
     @GetMapping("/list")
-    public ResponseEntity<ApiResponse> listAnimal(@RequestParam(defaultValue = "0") int page,
-                                                  @RequestParam(defaultValue = "10") int size) {
-        return animalService.getAnimals(page,size);
+    public ResponseEntity<ApiResponse> listAnimal(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String searchText // Arama metni parametresi
+    ) {
+        return animalService.getAnimals(page, size, searchText);
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ApiResponse> deleteAnimal(@PathVariable UUID id){

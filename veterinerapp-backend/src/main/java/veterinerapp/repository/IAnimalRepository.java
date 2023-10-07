@@ -14,5 +14,7 @@ public interface IAnimalRepository extends JpaRepository<Animal , UUID> {
 
     Animal findByAnimalName(String animalName);
     @NotNull Page<Animal> findAll(Pageable pageable);
+    Page<Animal> findByAnimalNameStartsWith(String searchText, Pageable pageable);
+    Page<Animal> findByParentNameStartsWith(String searchText,Pageable pageable);
 
 }

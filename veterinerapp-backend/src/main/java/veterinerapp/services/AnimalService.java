@@ -3,6 +3,7 @@ package veterinerapp.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,9 @@ import veterinerapp.response.ApiResponse;
 
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -83,9 +83,24 @@ var existingAnimal = animalRepository.findByAnimalName(addAnimalRequest.getAnima
         return new ResponseEntity<>(ApiResponse.builder().message(Message.SUCCESS.getDesc()).build(), HttpStatus.OK);
     }
 
-    public ResponseEntity<ApiResponse> getAnimals(int page, int size) {
+    public ResponseEntity<ApiResponse> getAnimals(int page, int size, String searchText) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Animal> animals = animalRepository.findAll(pageable);
+        Page<Animal> animals;
+
+        if (searchText != null && !searchText.isEmpty()) {
+            Page<Animal> animalsByAnimalName = animalRepository.findByAnimalNameStartsWith(searchText, pageable);
+            Page<Animal> animalsByParentName = animalRepository.findByParentNameStartsWith(searchText, pageable);
+
+            // İki sonucu birleştir
+            List<Animal> combinedList = Stream.concat(
+                            animalsByAnimalName.getContent().stream(),
+                            animalsByParentName.getContent().stream())
+                    .collect(Collectors.toList());
+
+            animals = new PageImpl<>(combinedList, pageable, combinedList.size());
+        } else {
+            animals = animalRepository.findAll(pageable);
+        }
 
         long totalElements = animals.getTotalElements(); // Toplam veri sayısı
         long totalPages = animals.getTotalPages();
@@ -93,14 +108,16 @@ var existingAnimal = animalRepository.findByAnimalName(addAnimalRequest.getAnima
         Map<String, Object> responseData = new HashMap<>();
         responseData.put("data", animals.getContent());
         responseData.put("totalElements", totalElements);
-        responseData.put("totalPages",totalPages);
-        responseData.put("currentPage",currentPage);
+        responseData.put("totalPages", totalPages);
+        responseData.put("currentPage", currentPage);
 
         return ResponseEntity.ok(ApiResponse.builder()
                 .data(responseData)
                 .message(Message.SUCCESS.getDesc())
                 .build());
     }
+
+
 
 
 }
