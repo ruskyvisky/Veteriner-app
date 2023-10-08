@@ -117,6 +117,16 @@ var existingAnimal = animalRepository.findByAnimalName(addAnimalRequest.getAnima
                 .build());
     }
 
+    public ResponseEntity<ApiResponse> getSingleAnimal(UUID id){
+    Animal singleAnimal = animalRepository.findById(id).orElse(null);
+
+    return ResponseEntity.ok(ApiResponse.builder()
+            .data(singleAnimal)
+            .message(Message.SUCCESS.getDesc())
+            .build()
+    );
+    }
+
 
 
 

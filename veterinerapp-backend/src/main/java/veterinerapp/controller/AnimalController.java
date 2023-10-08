@@ -45,5 +45,9 @@ public class AnimalController {
     {
         return animalService.updateAnimal(animalRequest,id);
     }
+    @GetMapping("/get/{id}")
+    public ResponseEntity<ApiResponse> getAnimal(@PathVariable UUID id){
+        return animalService.getSingleAnimal(id);
+    }
 
 }
