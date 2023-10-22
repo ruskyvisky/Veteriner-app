@@ -24,7 +24,8 @@ public enum Message {
     ANIMAL_ALREADY_EXISTS("ANIMAL_ALREADY_EXISTS","Sistemde var olan bir hayvanı ekleyemezsiniz."),
     ANIMAL_NOT_FOUND("ANIMAL_NOT_FOUND","Hayvan bulunamadı."),
 
-
+    /** TREATMENT_SERVİCE */
+    TREATMENT_NOT_FOUND("TREATMENT_NOT_FOUND","Tedavi bulunamadı."),
     /** FILE_SERVICE */
     FILE_NOT_FOUND("FILE_NOT_FOUND", "Silinecek dosya bulunamadı."),
     FILE_TYPE_NOT_ACCEPTABLE("FILE_TYPE_NOT_ACCEPTABLE", "Bu dosya tipi kabul edilemiyor.");
