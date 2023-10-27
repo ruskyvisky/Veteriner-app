@@ -2,8 +2,9 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Typography, Card, Row, Col } from 'antd';
 import { authType } from '@/types/authTypes'
-import useRegister  from '@/hooks/useRegister'
-import useLogin from '@/hooks/useLogin'
+import useRegister  from '@/hooks/auth/useRegister'
+import useLogin from '@/hooks/auth/useLogin'
+import { useRouter } from 'next/navigation'
 const { Link } = Typography;
 
 
@@ -11,13 +12,14 @@ const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo)
 };
 const LoginPage = () => {
-  
+  const router = useRouter()
   const [isRegister, setIsRegister] = useState(false)
 
   const { registerOperation, registerLoading } = useRegister()
   const { loginOperation, loginLoading } = useLogin()
   const onFinish = (values: any) => {
-    isRegister ? registerOperation(values) : loginOperation(values)
+    isRegister ? registerOperation(values) : loginOperation(values) 
+
   };
   return (
     <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
