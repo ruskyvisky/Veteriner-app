@@ -5,6 +5,7 @@ import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { useRouter } from 'next/navigation'
 import {FiLogOut} from 'react-icons/fi/'
+import useLogout from '@/hooks/auth/useLogout';
 type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
@@ -44,6 +45,7 @@ const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
 const SideMenu: React.FC = () => {
 const router = useRouter();
+const {logout} = useLogout()
 
   const [openKeys, setOpenKeys] = useState(['sub1']);
 
@@ -76,6 +78,9 @@ const router = useRouter();
     <Menu
     style={{color:'red' , width: 256 , height: '100%'}}
     items={items2}
+    onClick={() => {
+      logout()
+    }}
     />
     </div>
   );
