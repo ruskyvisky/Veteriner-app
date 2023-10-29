@@ -11,7 +11,7 @@ type Props = {
 <div style={{flexDirection:'row' , display:'flex'}}>
     <SideMenu/>
   
-  <div style={{justifyContent:'center', flexDirection:'row', alignContent:'center' }}>
+  <div style={{ alignContent:'center' , padding:'10px'}}>
             {children}
             </div>
             </div>
