@@ -6,40 +6,23 @@ const { Option } = Select;
 interface Props {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleOk: () => void;
+  handleCancel: () => void;
+  inputValue: string;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleAddInfo: () => void;
+  handleCategoryChange: (value: string) => void;
+  infoList: { name: string; category: string }[];
+  handleDelete: (name: string, category: string) => void;
 }
 
-const AddInfoModal = ({ isModalOpen, setIsModalOpen }: Props) => {
-  const [infoList, setInfoList] = useState<{ name: string; category: string }[]>([]);
-  const [inputValue, setInputValue] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleCategoryChange = (value: string) => {
-    setSelectedCategory(value);
-  };
-
-  const handleAddInfo = () => {
-    if (inputValue && selectedCategory) {
-      setInfoList([...infoList, { name: inputValue, category: selectedCategory }]);
-      setInputValue('');
-    }
-  };
-  const handleDelete = (name: string, category: string) => {
-    const updatedList = infoList.filter((item) => item.name !== name || item.category !== category);
-    setInfoList(updatedList);
-  };
-
+const AddInfoModal = ({ 
+  isModalOpen, setIsModalOpen , handleOk,handleCancel,inputValue, handleInputChange,handleAddInfo,
+  infoList,
+  handleDelete,
+  handleCategoryChange
+}: Props) => {
+ 
 
   return (
     <Modal

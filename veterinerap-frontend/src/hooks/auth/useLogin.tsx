@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import cookie from "js-cookie";
-import { authType } from "@/types/authTypes";
 import { toastError, toastSuccess } from "@/toastMessages";
 import {loginQueryFn} from "@/api/authQueryFn"
 import { useRouter } from "next/navigation";
